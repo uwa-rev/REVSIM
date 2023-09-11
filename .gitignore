@@ -63,4 +63,5 @@ crashlytics-build.properties
 
 # Externals directory
 [Aa]ssets/AWSIM/Externals/*
+[Aa]ssets/UWA-REV/External/*
 ![Aa]ssets/AWSIM/Externals/.gitkeep
