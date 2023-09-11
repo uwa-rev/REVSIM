@@ -207,13 +207,17 @@ namespace AWSIM.TrafficSimulation
             foreach (var entry in laneletMap.Lines)
             {
                 var line = entry.Value;
-                if (line.Attributes[AttributeKeys.Type] != AttributeValues.StopLine)
+                if (line.Attributes.TryGetValue(AttributeKeys.Type, out string laneType))
                 {
+                    if (laneType == AttributeValues.StopLine)
+                    {
+                        var stopLine = StopLine.Create(line[0], line[1]);
+                        stopLine.transform.parent = stopLineHolder.transform;
+                        stopLines.Add(entry.Key, stopLine);
+                    }
+                } else {
                     continue;
                 }
-                var stopLine = StopLine.Create(line[0], line[1]);
-                stopLine.transform.parent = stopLineHolder.transform;
-                stopLines.Add(entry.Key, stopLine);
             }
         }
 
@@ -293,25 +297,33 @@ namespace AWSIM.TrafficSimulation
                 foreach (var line in regElem.Refers)
                 {
                     var trafficLightPosition = line.Points[1];
-                    var trafficLight = FindClosestTrafficLight(trafficLights, trafficLightPosition);
-                    if (trafficLight == null)
+                    var closestTrafficLight = FindClosestTrafficLight(trafficLights, trafficLightPosition);
+                    if (closestTrafficLight == null)
                     {
                         continue;
                     }
-                    EditorUtility.SetDirty(trafficLight);
-                    Undo.RecordObject(trafficLight, "Assigning lanelet id");
-                    var trafficLightLaneletID = trafficLight.GetComponentInParent<TrafficLightLaneletID>();
-                    if (trafficLightLaneletID == null)
-                    {
-                        trafficLight.gameObject.AddComponent<TrafficLightLaneletID>();
-                    }
-                    else
-                    {
-                        trafficLightLaneletID.LaneletElementID = line.ID;
-                    }
-                    PrefabUtility.RecordPrefabInstancePropertyModifications(trafficLight);
+                    FillTrafficLightRelationIDWayID(closestTrafficLight, regElem.ID, line.ID);
                 }
             }
+        }
+
+        private void FillTrafficLightRelationIDWayID(TrafficLight trafficLight, long relationId, long wayID)
+        {
+            EditorUtility.SetDirty(trafficLight);
+            Undo.RecordObject(trafficLight, "Assigning lanelet id");
+            var trafficLightLaneletID = trafficLight.GetComponentInParent<TrafficLightLaneletID>();
+            if (trafficLightLaneletID == null)
+            {
+                trafficLight.gameObject.AddComponent<TrafficLightLaneletID>();
+                trafficLightLaneletID = trafficLight.GetComponentInParent<TrafficLightLaneletID>();
+            }
+
+            if (!trafficLightLaneletID.relationID.Contains(relationId))
+            {
+                trafficLightLaneletID.relationID.Add(relationId);
+            }
+            trafficLightLaneletID.wayID = wayID;
+            PrefabUtility.RecordPrefabInstancePropertyModifications(trafficLight);
         }
     }
 }
