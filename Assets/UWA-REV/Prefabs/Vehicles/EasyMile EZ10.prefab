@@ -1213,8 +1213,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4843604171253800091}
   - {fileID: 2465439771431800668}
+  - {fileID: 4843604171253800091}
   m_Father: {fileID: 635807138616992815}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1391,7 +1391,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4081177469890753716}
   m_Layer: 6
-  m_Name: velodyne_rear_base_link
+  m_Name: velodyne_rear_link
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1410,7 +1410,7 @@ Transform:
   m_Children:
   - {fileID: 6167027111368705379}
   m_Father: {fileID: 4843604171253800091}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &5383865282617533158
 GameObject:
@@ -1441,10 +1441,10 @@ Transform:
   m_Children:
   - {fileID: 6521593336157218059}
   - {fileID: 5894039335649756224}
-  - {fileID: 8247886721122015980}
-  - {fileID: 4081177469890753716}
   - {fileID: 7672491730288430828}
   - {fileID: 4609678409752573225}
+  - {fileID: 8247886721122015980}
+  - {fileID: 4081177469890753716}
   - {fileID: 1426515923523509538}
   - {fileID: 1719619329097633772}
   - {fileID: 6555140682312916706}
@@ -1452,7 +1452,7 @@ Transform:
   - {fileID: 7972833103539582722}
   - {fileID: 3166793284106476936}
   m_Father: {fileID: 5512666411487739948}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5499827412767117486
 GameObject:
@@ -1577,7 +1577,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1719619329097633772}
   m_Layer: 6
-  m_Name: sick_mrs_back_link
+  m_Name: sick_mrs_rear_link
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1967,7 +1967,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8247886721122015980}
   m_Layer: 6
-  m_Name: velodyne_front_base_link
+  m_Name: velodyne_front_link
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1986,7 +1986,7 @@ Transform:
   m_Children:
   - {fileID: 6711302284166953242}
   m_Father: {fileID: 4843604171253800091}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7997555940447921516
 GameObject:
@@ -2017,7 +2017,7 @@ Transform:
   m_Children:
   - {fileID: 751587070600043837}
   m_Father: {fileID: 4843604171253800091}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8180626095536217131
 GameObject:
@@ -2048,7 +2048,7 @@ Transform:
   m_Children:
   - {fileID: 2288343867904444004}
   m_Father: {fileID: 4843604171253800091}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &8365781695008320239
 GameObject:
@@ -2336,19 +2336,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3825037493276011416, guid: 04c05ebf6076587e18b6d2997b930d3a, type: 3}
       propertyPath: frameID
-      value: sick_mrs_back_link
+      value: sick_mrs_rear_link
       objectReference: {fileID: 0}
     - target: {fileID: 3825037493276011416, guid: 04c05ebf6076587e18b6d2997b930d3a, type: 3}
       propertyPath: pcl24Topic
-      value: uway/sensor/sickback/lidar/pointcloud
+      value: /lidar_localisation/rear/cloud
       objectReference: {fileID: 0}
     - target: {fileID: 3825037493276011416, guid: 04c05ebf6076587e18b6d2997b930d3a, type: 3}
       propertyPath: pcl48Topic
-      value: uway/sensor/sickback/lidar/pointcloud_ex
+      value: /lidar_localisation/rear/cloud_ex
       objectReference: {fileID: 0}
     - target: {fileID: 3825037493276011416, guid: 04c05ebf6076587e18b6d2997b930d3a, type: 3}
       propertyPath: instanceIdTopic
-      value: uway/sensor/sickback/lidar/instance_id
+      value: /lidar_localisation/rear/instance_id
       objectReference: {fileID: 0}
     - target: {fileID: 8634644705376915353, guid: 04c05ebf6076587e18b6d2997b930d3a, type: 3}
       propertyPath: m_Name
@@ -2418,15 +2418,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3825037493276011416, guid: 73793692e007bae7d8e4295412963236, type: 3}
       propertyPath: pcl24Topic
-      value: uway/sensor/sickrr/lidar/pointcloud
+      value: /lidar_safety/rear_right/cloud
       objectReference: {fileID: 0}
     - target: {fileID: 3825037493276011416, guid: 73793692e007bae7d8e4295412963236, type: 3}
       propertyPath: pcl48Topic
-      value: uway/sensor/sickrr/lidar/pointcloud_ex
+      value: /lidar_safety/rear_right/cloud_ex
       objectReference: {fileID: 0}
     - target: {fileID: 3825037493276011416, guid: 73793692e007bae7d8e4295412963236, type: 3}
       propertyPath: instanceIdTopic
-      value: uway/sensor/sickrr/lidar/instance_id
+      value: /lidar_safety/rear_right/instance_id
       objectReference: {fileID: 0}
     - target: {fileID: 8634644705376915353, guid: 73793692e007bae7d8e4295412963236, type: 3}
       propertyPath: m_Name
@@ -2495,12 +2495,16 @@ PrefabInstance:
       value: GnssSensor
       objectReference: {fileID: 0}
     - target: {fileID: 6286939631007548236, guid: 59e7e9ade816f8c4ebcf27bed302dcbe, type: 3}
+      propertyPath: frameId
+      value: gnss_link
+      objectReference: {fileID: 0}
+    - target: {fileID: 6286939631007548236, guid: 59e7e9ade816f8c4ebcf27bed302dcbe, type: 3}
       propertyPath: poseTopic
-      value: uway/sensor/gnss/pose
+      value: /gnss/pose
       objectReference: {fileID: 0}
     - target: {fileID: 6286939631007548236, guid: 59e7e9ade816f8c4ebcf27bed302dcbe, type: 3}
       propertyPath: poseWithCovarianceStampedTopic
-      value: uway/sensor/gnss/pose_with_covariance
+      value: /gnss/pose_with_covariance
       objectReference: {fileID: 0}
     - target: {fileID: 7422499278971356147, guid: 59e7e9ade816f8c4ebcf27bed302dcbe, type: 3}
       propertyPath: m_RootOrder
@@ -2566,15 +2570,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3825037493276011416, guid: 73793692e007bae7d8e4295412963236, type: 3}
       propertyPath: pcl24Topic
-      value: uway/sensor/sickfl/lidar/pointcloud
+      value: /lidar_safety/front_left/cloud
       objectReference: {fileID: 0}
     - target: {fileID: 3825037493276011416, guid: 73793692e007bae7d8e4295412963236, type: 3}
       propertyPath: pcl48Topic
-      value: uway/sensor/sickfl/lidar/pointcloud_ex
+      value: /lidar_safety/front_left/cloud_ex
       objectReference: {fileID: 0}
     - target: {fileID: 3825037493276011416, guid: 73793692e007bae7d8e4295412963236, type: 3}
       propertyPath: instanceIdTopic
-      value: uway/sensor/sickfl/lidar/instance_id
+      value: /lidar_safety/front_left/instance_id
       objectReference: {fileID: 0}
     - target: {fileID: 8634644705376915353, guid: 73793692e007bae7d8e4295412963236, type: 3}
       propertyPath: m_Name
@@ -2644,15 +2648,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3825037493276011416, guid: 04c05ebf6076587e18b6d2997b930d3a, type: 3}
       propertyPath: pcl24Topic
-      value: uway/sensor/sickfront/lidar/pointcloud
+      value: /lidar_localisation/front/cloud
       objectReference: {fileID: 0}
     - target: {fileID: 3825037493276011416, guid: 04c05ebf6076587e18b6d2997b930d3a, type: 3}
       propertyPath: pcl48Topic
-      value: uway/sensor/sickfront/lidar/pointcloud_ex
+      value: /lidar_localisation/front/cloud_ex
       objectReference: {fileID: 0}
     - target: {fileID: 3825037493276011416, guid: 04c05ebf6076587e18b6d2997b930d3a, type: 3}
       propertyPath: instanceIdTopic
-      value: uway/sensor/sickfront/lidar/instance_id
+      value: /lidar_localisation/front/instance_id
       objectReference: {fileID: 0}
     - target: {fileID: 8634644705376915353, guid: 04c05ebf6076587e18b6d2997b930d3a, type: 3}
       propertyPath: m_Name
@@ -2722,15 +2726,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3825037493276011416, guid: 73793692e007bae7d8e4295412963236, type: 3}
       propertyPath: pcl24Topic
-      value: uway/sensor/sickrl/lidar/pointcloud
+      value: /lidar_safety/rear_left/cloud
       objectReference: {fileID: 0}
     - target: {fileID: 3825037493276011416, guid: 73793692e007bae7d8e4295412963236, type: 3}
       propertyPath: pcl48Topic
-      value: uway/sensor/sickrl/lidar/pointcloud_ex
+      value: /lidar_safety/rear_left/cloud_ex
       objectReference: {fileID: 0}
     - target: {fileID: 3825037493276011416, guid: 73793692e007bae7d8e4295412963236, type: 3}
       propertyPath: instanceIdTopic
-      value: uway/sensor/sickrl/lidar/instance_id
+      value: /lidar_safety/rear_left/instance_id
       objectReference: {fileID: 0}
     - target: {fileID: 8634644705376915353, guid: 73793692e007bae7d8e4295412963236, type: 3}
       propertyPath: m_Name
@@ -2880,11 +2884,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7800869322880189815, guid: c7276496f3d93284c9ac668faf9a39c6, type: 3}
       propertyPath: imageTopic
-      value: uway/sensor/front/camera/image_raw
+      value: /camera/rgb_front/image
       objectReference: {fileID: 0}
     - target: {fileID: 7800869322880189815, guid: c7276496f3d93284c9ac668faf9a39c6, type: 3}
       propertyPath: cameraInfoTopic
-      value: uway/sensor/front/camera/camera_info
+      value: /camera/rgb_front/camera_info
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7276496f3d93284c9ac668faf9a39c6, type: 3}
@@ -2900,9 +2904,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5512666411487739948}
     m_Modifications:
+    - target: {fileID: 5621238221860094232, guid: e312a43ad62d38a40b798203047bfe57, type: 3}
+      propertyPath: FrameID
+      value: base_link
+      objectReference: {fileID: 0}
     - target: {fileID: 5621238221860094233, guid: e312a43ad62d38a40b798203047bfe57, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5621238221860094233, guid: e312a43ad62d38a40b798203047bfe57, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3064,11 +3072,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7800869322880189815, guid: c7276496f3d93284c9ac668faf9a39c6, type: 3}
       propertyPath: imageTopic
-      value: uway/sensor/rear/camera/image_raw
+      value: /camera/rgb_rear/image
       objectReference: {fileID: 0}
     - target: {fileID: 7800869322880189815, guid: c7276496f3d93284c9ac668faf9a39c6, type: 3}
       propertyPath: cameraInfoTopic
-      value: uway/sensor/rear/camera/camera_info
+      value: /camera/rgb_rear/camera_info
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7276496f3d93284c9ac668faf9a39c6, type: 3}
@@ -3086,7 +3094,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1213553379199470883, guid: 7b7ea1674328b854b98bd5008b84bb44, type: 3}
       propertyPath: topic
-      value: uway/sensor/imu_raw
+      value: /imu
       objectReference: {fileID: 0}
     - target: {fileID: 1213553379199470883, guid: 7b7ea1674328b854b98bd5008b84bb44, type: 3}
       propertyPath: frameId
@@ -3432,19 +3440,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5865029131659967986, guid: 9351c3661d105f12f9fe2819a1203053, type: 3}
       propertyPath: frameID
-      value: velodyne_front_base_link
+      value: velodyne_front_link
       objectReference: {fileID: 0}
     - target: {fileID: 5865029131659967986, guid: 9351c3661d105f12f9fe2819a1203053, type: 3}
       propertyPath: pcl24Topic
-      value: uway/sensor/front/lidar/pointcloud
+      value: /lidar/velodyne/front/cloud
       objectReference: {fileID: 0}
     - target: {fileID: 5865029131659967986, guid: 9351c3661d105f12f9fe2819a1203053, type: 3}
       propertyPath: pcl48Topic
-      value: uway/sensor/front/lidar/pointcloud_ex
+      value: /lidar/velodyne/front/cloud_ex
       objectReference: {fileID: 0}
     - target: {fileID: 5865029131659967986, guid: 9351c3661d105f12f9fe2819a1203053, type: 3}
       propertyPath: instanceIdTopic
-      value: uway/sensor/front/lidar/instance_id
+      value: /lidar/velodyne/front/instance_id
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9351c3661d105f12f9fe2819a1203053, type: 3}
@@ -3738,19 +3746,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5865029131659967986, guid: 9351c3661d105f12f9fe2819a1203053, type: 3}
       propertyPath: frameID
-      value: velodyne_rear_base_link
+      value: velodyne_rear_link
       objectReference: {fileID: 0}
     - target: {fileID: 5865029131659967986, guid: 9351c3661d105f12f9fe2819a1203053, type: 3}
       propertyPath: pcl24Topic
-      value: uway/sensor/rear/lidar/pointcloud
+      value: /lidar/velodyne/rear/cloud
       objectReference: {fileID: 0}
     - target: {fileID: 5865029131659967986, guid: 9351c3661d105f12f9fe2819a1203053, type: 3}
       propertyPath: pcl48Topic
-      value: uway/sensor/rear/lidar/pointcloud_ex
+      value: /lidar/velodyne/rear/cloud_ex
       objectReference: {fileID: 0}
     - target: {fileID: 5865029131659967986, guid: 9351c3661d105f12f9fe2819a1203053, type: 3}
       propertyPath: instanceIdTopic
-      value: uway/sensor/rear/lidar/instance_id
+      value: /lidar/velodyne/rear/instance_id
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9351c3661d105f12f9fe2819a1203053, type: 3}
@@ -3772,15 +3780,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3825037493276011416, guid: 73793692e007bae7d8e4295412963236, type: 3}
       propertyPath: pcl24Topic
-      value: uway/sensor/sickfr/lidar/pointcloud
+      value: /lidar_safety/front_right/cloud
       objectReference: {fileID: 0}
     - target: {fileID: 3825037493276011416, guid: 73793692e007bae7d8e4295412963236, type: 3}
       propertyPath: pcl48Topic
-      value: uway/sensor/sickfr/lidar/pointcloud_ex
+      value: /lidar_safety/front_right/cloud_ex
       objectReference: {fileID: 0}
     - target: {fileID: 3825037493276011416, guid: 73793692e007bae7d8e4295412963236, type: 3}
       propertyPath: instanceIdTopic
-      value: uway/sensor/sickfr/lidar/instance_id
+      value: /lidar_safety/front_right/instance_id
       objectReference: {fileID: 0}
     - target: {fileID: 8634644705376915353, guid: 73793692e007bae7d8e4295412963236, type: 3}
       propertyPath: m_Name

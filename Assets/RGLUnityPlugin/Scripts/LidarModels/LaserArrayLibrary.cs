@@ -585,8 +585,8 @@ namespace RGLUnityPlugin
 
         public static LaserArray LMS151_10100 => new LaserArray
         {
-            centerOfMeasurementVerticalLinearOffsetMm = 0.0f,
-            centerOfMeasurementHorizontalLinearOffsetMm = 0.0f,
+            centerOfMeasurementLinearOffsetMm = new Vector3(0.0f, 0.0f, 0.0f),
+            focalDistanceMm = 0.0f,
             lasers = new[]
             {
                 new Laser {verticalAngularOffsetDeg = +0.0f, verticalLinearOffsetMm = +0.0f, ringId = 1},
@@ -595,8 +595,8 @@ namespace RGLUnityPlugin
 
         public static LaserArray LD_MRS => new LaserArray
         {
-            centerOfMeasurementVerticalLinearOffsetMm = 0.0f,
-            centerOfMeasurementHorizontalLinearOffsetMm = 0.0f,
+            centerOfMeasurementLinearOffsetMm = new Vector3(0.0f, 0.0f, 0.0f),
+            focalDistanceMm = 0.0f,
             lasers = new[]
             {
                 new Laser {verticalAngularOffsetDeg = +1.6f, verticalLinearOffsetMm = +1.0f, ringId = 1},
