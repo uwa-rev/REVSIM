@@ -26,5 +26,6 @@ namespace RGLUnityPlugin
         OusterOS1_64,
         LMS151_10100,
         LD_MRS,
+        HesaiAT128E2X,
     }
 }

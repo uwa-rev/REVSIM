@@ -13,17 +13,17 @@ The ones mounted on the top of autonomous vehicles are primarily used
 
 *LiDARs* placed on the left and right sides of the vehicle are mainly used to monitor the traffic lane and detect vehicles moving in adjacent lanes, enabling safe maneuvers such as lane changing or turning.
 
-`LidarSensor` component is a part of [`RGLUnityPlugin`](../../../ExternalLibraries/RGLUnityPlugin/) that integrates the external [*RobotecGPULidar*](https://github.com/RobotecAI/RobotecGPULidar) (`RGL`) library with *Unity*. `RGL` also allows to provide additional information about objects, more about it [here](#read-material-information).
+`LidarSensor` component is a part of [`RGLUnityPlugin`](../RGLUnityPlugin/) that integrates the external [*RobotecGPULidar*](https://github.com/RobotecAI/RobotecGPULidar) (`RGL`) library with *Unity*. `RGL` also allows to provide additional information about objects, more about it [here](#read-material-information).
 
 !!! warning "Use RGL in your scene"
-    If you want to use `RGL` in your scene, make sure the scene has an [`SceneManager` component](../../../../../DeveloperGuide/Tutorials/AddANewScene/AddASceneManager) added and all objects meet the [usage requirements](../../../../ProjectGuide/ExternalLibraries/RGLUnityPlugin/#usage-requirements).
+    If you want to use `RGL` in your scene, make sure the scene has an [`SceneManager` component](../RGLUnityPlugin/#scenemanager) added and all objects meet the [usage requirements](../RGLUnityPlugin/#usage-requirements).
 
 !!! note "RGL default scenes"
-    If you would like to see how `LidarSensor` works using `RGL` or run some tests, we encourage you to familiarize yourself with the [`RGL` test scenes section](../../../DefaultExistingScenes/#rgl-test-scenes).
+    If you would like to see how `LidarSensor` works using `RGL` or run some tests, we encourage you to familiarize yourself with the [`RGL` test scenes section](../../../../ProjectGuide/Scenes/#rgl-test-scenes).
 
 !!! note "Supported *LiDARs*"
     The current scripts implementation allows you to configure the prefab for any mechanical *LiDAR*.
-    You can read about how to do it [here](../../../../../DeveloperGuide/Tutorials/AddANewLiDAR/).
+    You can read about how to do it [here](../AddNewLiDAR/).
     *MEMS-based LiDARs* due to their different design are not yet fully supported.
 
 ### Prefabs
@@ -39,6 +39,7 @@ The table of available prefabs can be found below:
 | :-------------------- | :----------------------- | :----------------------------------------------- |
 | *HESAI Pandar40P*     | `HesaiPandar40P.prefab`  | <img src=imgs_prefabs/pandar40p.png width=150px> |
 | *HESAI PandarQT64*    | `HesaiPandarQT64.prefab` | <img src=imgs_prefabs/pandarqt.png width=150px>  |
+| *HESAI AT128 E2X*     | `HesaiAT128E2X.prefab`   | <img src=imgs_prefabs/at128e2x.png width=150px>  |
 | *Ouster OS1-64*       | `OusterOS1-64.prefab`    | <img src=imgs_prefabs/os1-64.png width=150px>    |
 | *Velodyne VLP-16*     | `VelodyneVLP16.prefab`   | <img src=imgs_prefabs/vlp16.png width=150px>     |
 | *Velodyne VLC-32C*    | `VelodyneVLP32C.prefab`  | <img src=imgs_prefabs/vlp32.png width=150px>     |
@@ -47,12 +48,12 @@ The table of available prefabs can be found below:
 ### Link in the default Scene
 ![link](link.png)
 
-`LidarSensor` is configured in default vehicle `EgeVehicle` prefab.
+`LidarSensor` is configured in default vehicle `EgoVehicle` prefab.
 It is added to `URDF` object as a child of `sensor_kit_base_link`.
 `LidarSensor` placed in this way does not have its own frame, and the data is published relative to `sensor_kit_base_link`.
-More details about the location of the sensors in the vehicle can be found [here](../../EgoVehicle/URDF/).
+More details about the location of the sensors in the vehicle can be found [here](../../../../Components/Vehicle/URDFAndSensors/).
 
-A detailed description of the `URDF` structure and sensors added to prefab `Lexus RX450h 2015` is available in this [section](../../EgoVehicle/URDF/).
+A detailed description of the `URDF` structure and sensors added to prefab `Lexus RX450h 2015` is available in this [section](../../../../Components/Vehicle/URDFAndSensors/).
 
 !!! warning "Additional LiDARs"
     For a *LiDAR* placed on the left side, right side or rear, an additional link should be defined.
@@ -72,7 +73,7 @@ Moreover, the scripts use `Resources` to provide configuration for prefabs of su
 - *LaserArrayLibrary* - provides data related to laser array construction for supported models,
 - *LaserConfigurationLibrary* - provides full configuration, with ranges and noise for supported models.
 
-These are elements of the `RGLUnityPlugin`, you can read more [here](../../../ExternalLibraries/RGLUnityPlugin/).
+These are elements of the `RGLUnityPlugin`, you can read more [here](../RGLUnityPlugin/).
 
 ## Lidar Sensor (script)
 ![script](script.png)
@@ -91,20 +92,26 @@ The pipeline consists of:
 In this way, other components can request point cloud processing operations and receive data in the desired format.
 
 `LidarSensor` component in the output provides 3 types of data.
-Two of them: *rosPCL24* and *rosPCL48* are point clouds that are published by the [*RglLidarPublisher*](#rgllidarpublisher-script) component.
-Whereas vector *onlyHits* is used for visualization by the [*PointCloudVisualization*](#pointcloudvisualization-script) component.
+Two of them: *rosPCL24* and *rosPCL48* are point clouds that are published by the [*RglLidarPublisher*](#rgl-lidar-publisher-script) component.
+Whereas vector *onlyHits* is used for visualization by the [*PointCloudVisualization*](#point-cloud-visualization-script) component.
 
 #### Elements configurable from the editor level
 - `Automatic Capture Hz` - the rate of sensor processing (default: `10Hz`)
 - `Model Preset` - allows selecting one of the built-in *LiDAR* models (default: `RangeMeter`)
 - `Apply Distance Gaussian Noise` - enable/disable distance *Gaussian* noise (default: `true`)
 - `Apply Angular Gaussian Noise` - enable/disable angular *Gaussian* noise (default: `true`)
+- `Apply Velocity Distortion` - enable/disable velocity distortion (default: `false`)
 - *Configuration*:
-    - `Laser Array` - geometry description of lidar array, should be prepared on the basis of the manual for a given model of *LiDAR* (default: loaded from `LaserArrayLibrary`)
-    - `Horizontal Steps` - the number of laser array firings between `Min H Angle` and `Max H Angle` (default: `1`)
+    - `Ray Generate Method` - method that lidar's rays are generated:
+        1. `Rotating Lidar Equal Range` - rays are generated for rotating lidar with equal range for all of the lasers (described with `Min Range` and `Max Range`)
+        2. `Rotating Lidar Different Laser Ranges` - rays are generated for rotating lidar with different ranges for the lasers (described in `Laser Array`)
+        3. `Hesai AT128` - rays are generated in specific way to Hesai AT128 lidar
+    - `Laser Array` - geometry description of lidar's array of lasers, should be prepared on the basis of the manual for a given model of *LiDAR* (default: loaded from `LaserArrayLibrary`)
+    - `Horizontal Resolution` - the horiontal resolution of laser array firings
     - `Min H Angle` - minimum horizontal angle, left (default: `0`)
     - `Max H Angle` - maximum horizontal angle, right (default: `0`)
-    - `Max Range` - maximum range of the sensor (default: `40`)
+    - `Min Range` - minimum range of the sensor (applied when `Ray Generate Method` is `Rotating Lidar Equal Range`)
+    - `Max Range` - maximum range of the sensor (applied when `Ray Generate Method` is `Rotating Lidar Equal Range`)
     - *Noise Params*: 
         - `Angular Noise Type` - angular noise type<br>(default: `Ray Based`)
         - `Angular Noise St Dev` - angular noise standard deviation in degree<br>(default: `0.05729578`)
@@ -188,7 +195,7 @@ Assets/RGLUnityPlugin/Resources/PointCloudMaterial.mat
 
 ## Read material information
 
-To ensure the publication of the information described in this section, *GameObjects* must be adjusted accordingly. [This](../../../../../DeveloperGuide/Tutorials/ReadMaterialInformation/) tutorial describes how to do it.
+To ensure the publication of the information described in this section, *GameObjects* must be adjusted accordingly. [This](../ReadMaterialInformation/) tutorial describes how to do it.
 
 ### Intensity Texture
 
@@ -202,7 +209,7 @@ Point cloud containing intensity is published on the *ROS2* topic via `RglLidarP
 `RGL Unity Plugin` allows assigning an ID to *GameObjects* to produce a point cloud containing information about hit objects. It can be used for instance/semantic segmentation tasks.
 
 !!! note "LidarInstanceSegmentationDemo"
-    If you would like to see how `LidarInstanceSegmentationDemo` works using `RGL` or run some tests, we encourage you to familiarize yourself with this [section](../../../DefaultExistingScenes/#rgl-test-scenes).
+    If you would like to see how `LidarInstanceSegmentationDemo` works using `RGL` or run some tests, we encourage you to familiarize yourself with this [section](../../../../ProjectGuide/Scenes/#rgl-test-scenes).
 
 #### Output data
 
