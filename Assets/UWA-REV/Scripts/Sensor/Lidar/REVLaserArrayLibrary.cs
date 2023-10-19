@@ -16,20 +16,33 @@ using System.Collections.Generic;
 
 namespace RGLUnityPlugin
 {
-    public static class LaserArrayLibrary
+    public static class REVLaserArrayLibrary
     {
-        public static readonly Dictionary<LidarModel, LaserArray> ByModel =
-            new Dictionary<LidarModel, LaserArray>
+        public static readonly Dictionary<REVLidarModel, LaserArray> ByModel =
+            new Dictionary<REVLidarModel, LaserArray>
             {
-                {LidarModel.HesaiPandar40P, HesaiPandar40P},
-                {LidarModel.HesaiPandarQT, HesaiPandarQT},
-                {LidarModel.VelodyneVLP16, VelodyneVLP16},
-                {LidarModel.VelodyneVLP32C, VelodyneVLP32C},
-                {LidarModel.VelodyneVLS128, VelodyneVLS128},
-                {LidarModel.OusterOS1_64, OusterOS1_64},
-                {LidarModel.LMS151_10100, LMS151_10100},
-                {LidarModel.LD_MRS, LD_MRS},
+                // {REVLidarModel.HesaiPandar40P, HesaiPandar40P},
+                // {REVLidarModel.HesaiPandarQT, HesaiPandarQT},
+                // {REVLidarModel.VelodyneVLP16, VelodyneVLP16},
+                // {REVLidarModel.VelodyneVLP32C, VelodyneVLP32C},
+                // {REVLidarModel.VelodyneVLS128, VelodyneVLS128},
+                // {REVLidarModel.OusterOS1_64, OusterOS1_64},
+                // {REVLidarModel.LMS151_10100, LMS151_10100},
             };
+
+        // https://cdn.sick.com/media/pdf/0/40/840/dataSheet_LMS151-10100_1047607_en.pdf
+        public static LaserArray LMS151_10100 => new LaserArray
+        {
+            centerOfMeasurementVerticalLinearOffsetMm = 0.0f,
+            centerOfMeasurementHorizontalLinearOffsetMm = 0.0f,
+            lasers = new[]
+            {
+                new Laser {verticalAngularOffsetDeg = +1.6f, verticalLinearOffsetMm = +1.0f, ringId = 1},
+                new Laser {verticalAngularOffsetDeg = +0.8f, verticalLinearOffsetMm = +0.5f, ringId = 2},
+                new Laser {verticalAngularOffsetDeg = -0.8f, verticalLinearOffsetMm = -0.5f, ringId = 3},
+                new Laser {verticalAngularOffsetDeg = -1.6f, verticalLinearOffsetMm = -1.0f, ringId = 4},
+            }
+        };
 
         // https://web2019.blob.core.windows.net/uploads/Pandar40P_User_Manual_402-en-211010.pdf
         public static LaserArray HesaiPandar40P => new LaserArray
@@ -436,29 +449,6 @@ namespace RGLUnityPlugin
                 new Laser {horizontalAngularOffsetDeg = 1.169f, verticalAngularOffsetDeg = 15.458f, ringId = 62},
                 new Laser {horizontalAngularOffsetDeg = -0.971f, verticalAngularOffsetDeg = 16.011f, ringId = 63},
                 new Laser {horizontalAngularOffsetDeg = -3.108f, verticalAngularOffsetDeg = 16.598f, ringId = 64},
-            }
-        };
-
-        public static LaserArray LMS151_10100 => new LaserArray
-        {
-            centerOfMeasurementVerticalLinearOffsetMm = 0.0f,
-            centerOfMeasurementHorizontalLinearOffsetMm = 0.0f,
-            lasers = new[]
-            {
-                new Laser {verticalAngularOffsetDeg = +0.0f, verticalLinearOffsetMm = +0.0f, ringId = 1},
-            }
-        };
-
-        public static LaserArray LD_MRS => new LaserArray
-        {
-            centerOfMeasurementVerticalLinearOffsetMm = 0.0f,
-            centerOfMeasurementHorizontalLinearOffsetMm = 0.0f,
-            lasers = new[]
-            {
-                new Laser {verticalAngularOffsetDeg = +1.6f, verticalLinearOffsetMm = +1.0f, ringId = 1},
-                new Laser {verticalAngularOffsetDeg = +0.53333333f, verticalLinearOffsetMm = +0.6666f, ringId = 2},
-                new Laser {verticalAngularOffsetDeg = -0.53333333f, verticalLinearOffsetMm = +0.3333f, ringId = 3},
-                new Laser {verticalAngularOffsetDeg = -1.6f, verticalLinearOffsetMm = 0.0f, ringId = 4},
             }
         };
     }

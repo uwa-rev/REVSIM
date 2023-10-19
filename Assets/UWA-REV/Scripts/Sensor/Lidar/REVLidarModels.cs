@@ -14,7 +14,7 @@
 
 namespace RGLUnityPlugin
 {
-    public enum LidarModel
+    public enum REVLidarModel
     {
         RangeMeter,
         SickMRS6000,
@@ -25,6 +25,5 @@ namespace RGLUnityPlugin
         HesaiPandar40P,
         OusterOS1_64,
         LMS151_10100,
-        LD_MRS,
     }
 }

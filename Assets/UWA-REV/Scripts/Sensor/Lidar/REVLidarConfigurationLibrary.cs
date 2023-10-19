@@ -16,22 +16,31 @@ using System.Collections.Generic;
 
 namespace RGLUnityPlugin
 {
-    public static class LidarConfigurationLibrary
+    public static class REVLidarConfigurationLibrary
     {
         public static readonly Dictionary<LidarModel, LidarConfiguration> ByModel =
             new Dictionary<LidarModel, LidarConfiguration>
             {
-                {LidarModel.RangeMeter, RangeMeter},
-                {LidarModel.SickMRS6000, SickMRS6000},
-                {LidarModel.VelodyneVLP16, VelodyneVLP16},
-                {LidarModel.VelodyneVLP32C, VelodyneVLP32C},
-                {LidarModel.VelodyneVLS128, VelodyneVLS128},
-                {LidarModel.HesaiPandarQT, HesaiPandarQT},
-                {LidarModel.HesaiPandar40P, HesaiPandar40P},
-                {LidarModel.OusterOS1_64, OusterOS1_64},
-                {LidarModel.LMS151_10100, LMS151_10100},
-                {LidarModel.LD_MRS, LD_MRS},
+                // {REVLidarModel.RangeMeter, RangeMeter},
+                // {REVLidarModel.SickMRS6000, SickMRS6000},
+                // {REVLidarModel.VelodyneVLP16, VelodyneVLP16},
+                // {REVLidarModel.VelodyneVLP32C, VelodyneVLP32C},
+                // {REVLidarModel.VelodyneVLS128, VelodyneVLS128},
+                // {REVLidarModel.HesaiPandarQT, HesaiPandarQT},
+                // {REVLidarModel.HesaiPandar40P, HesaiPandar40P},
+                // {REVLidarModel.OusterOS1_64, OusterOS1_64},
+                // {REVLidarModel.LMS151_10100, LMS151_10100},
             };
+
+        public static LidarConfiguration LMS151_10100 => new LidarConfiguration
+        {
+            laserArray = LaserArrayLibrary.VelodyneVLP16,
+            horizontalResolution = 0.2f,
+            minHAngle = 0.0f,
+            maxHAngle = 110.0f,
+            maxRange = 220.0f,
+            noiseParams = LidarConfiguration.TypicalNoiseParams,
+        };
 
         public static LidarConfiguration RangeMeter => new LidarConfiguration
         {
@@ -115,26 +124,6 @@ namespace RGLUnityPlugin
             minHAngle = 0.0f,
             maxHAngle = 360.0f,
             maxRange = 120.0f,
-            noiseParams = LidarConfiguration.TypicalNoiseParams,
-        };
-
-        public static LidarConfiguration LMS151_10100 => new LidarConfiguration
-        {
-            laserArray = LaserArrayLibrary.LMS151_10100,
-            horizontalResolution = 0.2f,
-            minHAngle = 0.0f,
-            maxHAngle = 275.0f,
-            maxRange = 40.0f,
-            noiseParams = LidarConfiguration.TypicalNoiseParams,
-        };
-
-        public static LidarConfiguration LD_MRS => new LidarConfiguration
-        {
-            laserArray = LaserArrayLibrary.LD_MRS,
-            horizontalResolution = 0.2f,
-            minHAngle = -42.5f,
-            maxHAngle = 42.5f,
-            maxRange = 220.0f,
             noiseParams = LidarConfiguration.TypicalNoiseParams,
         };
     }

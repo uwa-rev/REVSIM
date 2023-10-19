@@ -110,6 +110,10 @@ namespace AWSIM
         // Set inertia?
         [SerializeField] bool useInertia;
 
+        // Set Max Speed - EZ10 max speed is 40km/h (11.11m /s) but is electronically limited to 16km/h (4.44 m/s)
+        [Range(2.22f, 11.11f)]
+        [SerializeField] float maxSpeed = 4.44f;
+
         // Moment of inertia applied to the vehicle (x, y, z).
         // reference sample (in 1998): https://www.researchgate.net/publication/228945609_Measured_Vehicle_Inertial_Parameters-NHTSA
         [SerializeField] Vector3 inertia;
@@ -131,6 +135,7 @@ namespace AWSIM
         [Header("Axles Settings")]
         [SerializeField] Axle frontAxle;
         [SerializeField] Axle rearAxle;
+        [SerializeField] bool twoAxleSteer = false;
 
         [Header("Input Settings")]
         // Set value to clamp SteerAngleInput (degree).
@@ -141,7 +146,7 @@ namespace AWSIM
         // Set value to clamp AccelerationInput (m/s^2).
         // -MaxAccelerationInput <= AccelerationInput <= MaxAccelerationInput.
         [Range(0.01f, 50)]
-        [SerializeField] float MaxAccelerationInput = 5;
+        [SerializeField] float MaxAccelerationInput = 1f;
 
         [Header("Inputs")]
 
@@ -288,11 +293,28 @@ namespace AWSIM
 
             void PreUpdateWheels()
             {
-                // Steer angle is front-only.
-                frontAxle.LeftWheel.UpdateWheelSteerAngle(SteerAngle);
-                frontAxle.RightWheel.UpdateWheelSteerAngle(SteerAngle);
-                rearAxle.LeftWheel.UpdateWheelSteerAngle(-SteerAngle);
-                rearAxle.RightWheel.UpdateWheelSteerAngle(-SteerAngle);
+                // Steering logic
+                if (twoAxleSteer == true)
+                {
+                    frontAxle.LeftWheel.UpdateWheelSteerAngle(SteerAngle);
+                    frontAxle.RightWheel.UpdateWheelSteerAngle(SteerAngle);
+                    rearAxle.LeftWheel.UpdateWheelSteerAngle(-SteerAngle);
+                    rearAxle.RightWheel.UpdateWheelSteerAngle(-SteerAngle);
+                }
+                else
+                {
+                    if (AutomaticShiftInput == Shift.DRIVE)
+                    {
+                        frontAxle.LeftWheel.UpdateWheelSteerAngle(SteerAngle);
+                        frontAxle.RightWheel.UpdateWheelSteerAngle(SteerAngle);
+                    }
+                    else if (AutomaticShiftInput == Shift.REVERSE)
+                    {
+                        rearAxle.LeftWheel.UpdateWheelSteerAngle(-SteerAngle);
+                        rearAxle.RightWheel.UpdateWheelSteerAngle(-SteerAngle);
+                    }
+                }
+                
 
                 foreach (var wheel in wheels)
                 {
@@ -404,7 +426,16 @@ namespace AWSIM
                     {
                         var minAcceleration = -Speed / Time.deltaTime;
                         if (acceleration < minAcceleration)
-                            acceleration = minAcceleration;
+                            acceleration = minAcceleration * 5;
+                    }
+                    else if (Speed > maxSpeed && acceleration > 0)
+                    {
+                        acceleration = 0;
+                    }
+                    
+                    if (Speed > 0 && acceleration < 0)
+                    {
+                        acceleration *= 5;
                     }
                 }
                 else if (AutomaticShiftInput == Shift.REVERSE)
@@ -413,9 +444,19 @@ namespace AWSIM
 
                     if (Speed > 0)
                     {
+                        
                         var maxAcceleration = Speed / Time.deltaTime;
                         if (acceleration > maxAcceleration)
                             acceleration = maxAcceleration;
+                    }
+                    else if (Speed < -maxSpeed && acceleration > 0)
+                    {
+                        acceleration = 0;
+                    }
+
+                    if (Speed < 0 && acceleration < 0)
+                    {
+                        acceleration *= 5;
                     }
                 }
                 else
