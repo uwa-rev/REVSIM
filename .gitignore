@@ -5,7 +5,6 @@
 /[Ll]ibrary/
 /[Tt]emp/
 /[Oo]bj/
-/[Bb]uild/
 /[Bb]uilds/
 /[Ll]ogs/
 /[Mm]emoryCaptures/
@@ -66,6 +65,7 @@ crashlytics-build.properties
 [Aa]ssets/UWA-REV/External/*
 ![Aa]ssets/AWSIM/Externals/.gitkeep
 ![Aa]ssets/AWSIM/Externals/.gitkeep
+[Bb]uild/*
 
 # JetBrains
 /.idea/
