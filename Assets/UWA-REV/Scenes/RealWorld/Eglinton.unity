@@ -1111,7 +1111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mgrsOffsetPosition: {x: 72733, y: 3522, z: 0}
-  mgrsGridZone: 50J LL
+  mgrsGridZone: 50JLL
 --- !u!1 &659067793
 GameObject:
   m_ObjectHideFlags: 0
