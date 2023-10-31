@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 262.3369, g: 325.0498, b: 430.2192, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -806,7 +806,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 320289822}
-  - component: {fileID: 320289821}
   m_Layer: 0
   m_Name: Scene
   m_TagString: Untagged
@@ -814,28 +813,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &320289821
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 320289820}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7acef0b79454c9b4dae3f8139bc4ba77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_RosIPAddress: 127.0.0.1
-  m_RosPort: 10000
-  m_ConnectOnStart: 1
-  m_KeepaliveTime: 1
-  m_NetworkTimeoutSeconds: 2
-  m_SleepTimeSeconds: 0.01
-  m_ShowHUD: 1
-  m_TFTopics:
-  - /tf
-  listenForTFMessages: 1
 --- !u!4 &320289822
 Transform:
   m_ObjectHideFlags: 0
@@ -1135,6 +1112,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mgrsOffsetPosition: {x: 72733, y: 3522, z: 0}
   mgrsGridZone: 50JLL
+--- !u!1 &595414242 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5383865282617533158, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
+  m_PrefabInstance: {fileID: 1508931123}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &595414244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 595414242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31edd641a06b6dcda86fdb077676e0fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tfTopic: /tf
+  frameId: sensor_kit_base_link
+  parentFrameId: base_link
+  isStatic: 0
+  qosSettings:
+    ReliabilityPolicy: 2
+    DurabilityPolicy: 2
+    HistoryPolicy: 1
+    Depth: 1
 --- !u!1 &659067793
 GameObject:
   m_ObjectHideFlags: 0
@@ -2494,6 +2497,32 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1218416928}
   m_CullTransparentMesh: 1
+--- !u!1 &1318560041 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7951434265901400619, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
+  m_PrefabInstance: {fileID: 1508931123}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1318560043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1318560041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31edd641a06b6dcda86fdb077676e0fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tfTopic: /tf
+  frameId: velodyne_front_link
+  parentFrameId: sensor_kit_base_link
+  isStatic: 0
+  qosSettings:
+    ReliabilityPolicy: 2
+    DurabilityPolicy: 2
+    HistoryPolicy: 1
+    Depth: 1
 --- !u!1 &1505364035
 GameObject:
   m_ObjectHideFlags: 0
@@ -2635,6 +2664,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 320289822}
     m_Modifications:
+    - target: {fileID: 1116928491213347817, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
+      propertyPath: configuration.maxHAngle
+      value: 275
+      objectReference: {fileID: 0}
+    - target: {fileID: 1116928491213347817, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
+      propertyPath: configuration.minHAngle
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2963106999894261215, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
       propertyPath: m_SuspensionSpring.damper
       value: 35000
@@ -2666,10 +2703,34 @@ PrefabInstance:
     - target: {fileID: 2963107001926338971, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
       propertyPath: m_SuspensionSpring.spring
       value: 101000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3022751402335737704, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
+      propertyPath: configuration.maxHAngle
+      value: 275
+      objectReference: {fileID: 0}
+    - target: {fileID: 3022751402335737704, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
+      propertyPath: configuration.minHAngle
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3089313591046698684, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3178066930510473734, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
+      propertyPath: tfTopic
+      value: /tf
+      objectReference: {fileID: 0}
+    - target: {fileID: 3178066930510473734, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
+      propertyPath: isStatic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3178066930510473734, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3178066930510473734, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
+      propertyPath: parentFrameId
+      value: base_link
       objectReference: {fileID: 0}
     - target: {fileID: 3351353493708182506, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
       propertyPath: m_Enabled
@@ -2690,6 +2751,14 @@ PrefabInstance:
     - target: {fileID: 5242271075381978099, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5471985907395306415, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
+      propertyPath: configuration.maxHAngle
+      value: 275
+      objectReference: {fileID: 0}
+    - target: {fileID: 5471985907395306415, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
+      propertyPath: configuration.minHAngle
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5650763240072318842, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
       propertyPath: m_RootOrder
@@ -2745,6 +2814,54 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6603278512200060955, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
       propertyPath: useInertia
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8521853732928023493, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
+      propertyPath: configuration.maxRange
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8521853732928023493, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
+      propertyPath: configuration.maxHAngle
+      value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 8521853732928023493, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
+      propertyPath: configuration.minHAngle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8521853732928023493, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
+      propertyPath: configuration.horizontalResolution
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8521853732928023493, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
+      propertyPath: configuration.noiseParams.angularNoiseType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8996868255607607257, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
+      propertyPath: configuration.maxHAngle
+      value: 275
+      objectReference: {fileID: 0}
+    - target: {fileID: 8996868255607607257, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
+      propertyPath: configuration.minHAngle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9148305580163520444, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
+      propertyPath: configuration.maxRange
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 9148305580163520444, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
+      propertyPath: configuration.maxHAngle
+      value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 9148305580163520444, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
+      propertyPath: configuration.minHAngle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9148305580163520444, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
+      propertyPath: configuration.horizontalResolution
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9148305580163520444, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
+      propertyPath: configuration.noiseParams.angularNoiseType
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -3117,6 +3234,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 320289822}
     m_Modifications:
+    - target: {fileID: 1116928491213347817, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
+      propertyPath: configuration.maxHAngle
+      value: 275
+      objectReference: {fileID: 0}
+    - target: {fileID: 1116928491213347817, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
+      propertyPath: configuration.minHAngle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3022751402335737704, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
+      propertyPath: configuration.maxHAngle
+      value: 275
+      objectReference: {fileID: 0}
+    - target: {fileID: 3022751402335737704, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
+      propertyPath: configuration.minHAngle
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3089313591046698684, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -3127,6 +3260,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4981081891045692864, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5471985907395306415, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
+      propertyPath: configuration.maxHAngle
+      value: 275
+      objectReference: {fileID: 0}
+    - target: {fileID: 5471985907395306415, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
+      propertyPath: configuration.minHAngle
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5650763240072318842, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
@@ -3176,6 +3317,54 @@ PrefabInstance:
     - target: {fileID: 6578767225350697112, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8521853732928023493, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
+      propertyPath: configuration.maxRange
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8521853732928023493, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
+      propertyPath: configuration.maxHAngle
+      value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 8521853732928023493, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
+      propertyPath: configuration.minHAngle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8521853732928023493, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
+      propertyPath: configuration.horizontalResolution
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8521853732928023493, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
+      propertyPath: configuration.noiseParams.angularNoiseType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8996868255607607257, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
+      propertyPath: configuration.maxHAngle
+      value: 275
+      objectReference: {fileID: 0}
+    - target: {fileID: 8996868255607607257, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
+      propertyPath: configuration.minHAngle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9148305580163520444, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
+      propertyPath: configuration.maxRange
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 9148305580163520444, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
+      propertyPath: configuration.maxHAngle
+      value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 9148305580163520444, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
+      propertyPath: configuration.minHAngle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9148305580163520444, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
+      propertyPath: configuration.horizontalResolution
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9148305580163520444, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
+      propertyPath: configuration.noiseParams.angularNoiseType
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
