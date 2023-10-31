@@ -65,7 +65,12 @@ crashlytics-build.properties
 [Aa]ssets/UWA-REV/External/*
 ![Aa]ssets/AWSIM/Externals/.gitkeep
 ![Aa]ssets/AWSIM/Externals/.gitkeep
+
+# ROS Stuff
 [Bb]uild/*
+[Rr]osws/build/*
+[Rr]osws/install/*
+[Rr]osws/log/*
 
 # JetBrains
 /.idea/
