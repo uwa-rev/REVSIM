@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 262.3369, g: 325.0498, b: 430.2192, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1112,32 +1112,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mgrsOffsetPosition: {x: 72733, y: 3522, z: 0}
   mgrsGridZone: 50JLL
---- !u!1 &595414242 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5383865282617533158, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
-  m_PrefabInstance: {fileID: 1508931123}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &595414244
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 595414242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31edd641a06b6dcda86fdb077676e0fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tfTopic: /tf
-  frameId: sensor_kit_base_link
-  parentFrameId: base_link
-  isStatic: 0
-  qosSettings:
-    ReliabilityPolicy: 2
-    DurabilityPolicy: 2
-    HistoryPolicy: 1
-    Depth: 1
 --- !u!1 &659067793
 GameObject:
   m_ObjectHideFlags: 0
@@ -2497,32 +2471,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1218416928}
   m_CullTransparentMesh: 1
---- !u!1 &1318560041 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7951434265901400619, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
-  m_PrefabInstance: {fileID: 1508931123}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1318560043
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1318560041}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31edd641a06b6dcda86fdb077676e0fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tfTopic: /tf
-  frameId: velodyne_front_link
-  parentFrameId: sensor_kit_base_link
-  isStatic: 0
-  qosSettings:
-    ReliabilityPolicy: 2
-    DurabilityPolicy: 2
-    HistoryPolicy: 1
-    Depth: 1
 --- !u!1 &1505364035
 GameObject:
   m_ObjectHideFlags: 0
@@ -2721,16 +2669,8 @@ PrefabInstance:
       value: /tf
       objectReference: {fileID: 0}
     - target: {fileID: 3178066930510473734, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
-      propertyPath: isStatic
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3178066930510473734, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
       propertyPath: m_Enabled
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3178066930510473734, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
-      propertyPath: parentFrameId
-      value: base_link
       objectReference: {fileID: 0}
     - target: {fileID: 3351353493708182506, guid: c15909032036fa8558ff33ef30f98eb1, type: 3}
       propertyPath: m_Enabled

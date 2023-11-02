@@ -10,11 +10,6 @@ namespace AWSIM
         [Header("ROS Topic parameters")]
 
         /// <summary>
-        /// Topic name for transform.
-        /// </summary>
-        public string tfTopic = "/tf_static";
-
-        /// <summary>
         /// Transform frame id.
         /// </summary>
         public string frameId = "_link";
@@ -23,6 +18,11 @@ namespace AWSIM
         /// Parent frame id.
         /// </summary>
         public string parentFrameId = "_link";
+
+        /// <summary>
+        /// Publish Speed.
+        /// </summary>
+        [SerializeField] int publishHz = 10;
 
         [SerializeField] bool isStatic;
 
@@ -34,50 +34,45 @@ namespace AWSIM
             ReliabilityPolicy = ReliabilityPolicy.QOS_POLICY_RELIABILITY_BEST_EFFORT,
             DurabilityPolicy = DurabilityPolicy.QOS_POLICY_DURABILITY_VOLATILE,
             HistoryPolicy = HistoryPolicy.QOS_POLICY_HISTORY_KEEP_LAST,
-            Depth = 1,
+            Depth = 10,
         };
 
         float timer = 0;
-        int publishHz = 10;
 
-        IPublisher<tf2_msgs.msg.TFMessage> tfPublisher;
-        tf2_msgs.msg.TFMessage tfMsg;
-        // tf2_ros.TransformBroadcaster br;
-        geometry_msgs.msg.TransformStamped tfTrans;
+        IPublisher<geometry_msgs.msg.TransformStamped> utfStaticPublisher;
+        IPublisher<geometry_msgs.msg.TransformStamped> utfPublisher;
+        geometry_msgs.msg.TransformStamped utfStaticMsg;
+        geometry_msgs.msg.TransformStamped utfMsg;
         Transform t_transform;
 
 
         // Start is called before the first frame update
         void Start()
         {
-            tfMsg = new tf2_msgs.msg.TFMessage()
-            {
-                Transforms = new geometry_msgs.msg.TransformStamped[1],
-            };
 
-            tfTrans = new geometry_msgs.msg.TransformStamped()
+            utfStaticMsg = new geometry_msgs.msg.TransformStamped()
             {
                 Header = new std_msgs.msg.Header()
                 {
                     Frame_id = parentFrameId,
                 },
                 Child_frame_id = frameId,
-            }; 
+            };
 
-            // tfMsg.Transforms = new geometry_msgs.msg.TransformStamped[1];
-            // tfMsg.Transforms[0].Header.Frame_id = parentFrameId;
-            // tfMsg.Transforms[0].Child_frame_id = frameId;
-
-            // tfTrans.Header.Frame_id = parentFrameId;
-            // tfTrans.Child_frame_id = frameId;
-
-            // br.sendTransform(tfTrans);
+            utfMsg = new geometry_msgs.msg.TransformStamped()
+            {
+                Header = new std_msgs.msg.Header()
+                {
+                    Frame_id = parentFrameId,
+                },
+                Child_frame_id = frameId,
+            };
 
             // Create publisher
             var qos = qosSettings.GetQoSProfile();
-            tfPublisher = SimulatorROS2Node.CreatePublisher<tf2_msgs.msg.TFMessage>(tfTopic, qos);
+            utfStaticPublisher = SimulatorROS2Node.CreatePublisher<geometry_msgs.msg.TransformStamped>("/utf_static", qos);
+            utfPublisher = SimulatorROS2Node.CreatePublisher<geometry_msgs.msg.TransformStamped>("/utf", qos);
 
-            // t_transform = GetComponent<Transform>();
             t_transform = transform;
 
             if (isStatic == true)
@@ -85,31 +80,19 @@ namespace AWSIM
                 var rosLocalPosition = ROS2Utility.UnityToRosPosition(t_transform.localPosition);
                 var rosLocalRotation = ROS2Utility.UnityToRosRotation(t_transform.localRotation);
 
-                // tfMsg.Transforms.Transform[0].Translation.X = rosLocalPosition.x;
-                // tfMsg.Transforms.Transform[0].Translation.Y = rosLocalPosition.y;
-                // tfMsg.Transforms.Transform[0].Translation.Z = rosLocalPosition.z;
-                // tfMsg.Transforms.Transform[0].Rotation.X = rosLocalRotation.x;
-                // tfMsg.Transforms.Transform[0].Rotation.Y = rosLocalRotation.y;
-                // tfMsg.Transforms.Transform[0].Rotation.Z = rosLocalRotation.z;
-
-
-                tfTrans.Transform.Translation.X = rosLocalPosition.x;
-                tfTrans.Transform.Translation.Y = rosLocalPosition.y;
-                tfTrans.Transform.Translation.Z = rosLocalPosition.z;
-                tfTrans.Transform.Rotation.X = rosLocalRotation.x;
-                tfTrans.Transform.Rotation.Y = rosLocalRotation.y;
-                tfTrans.Transform.Rotation.Z = rosLocalRotation.z;
-                tfTrans.Transform.Rotation.W = rosLocalRotation.w;
+                utfStaticMsg.Transform.Translation.X = rosLocalPosition.x;
+                utfStaticMsg.Transform.Translation.Y = rosLocalPosition.y;
+                utfStaticMsg.Transform.Translation.Z = rosLocalPosition.z;
+                utfStaticMsg.Transform.Rotation.X = rosLocalRotation.x;
+                utfStaticMsg.Transform.Rotation.Y = rosLocalRotation.y;
+                utfStaticMsg.Transform.Rotation.Z = rosLocalRotation.z;
+                utfStaticMsg.Transform.Rotation.W = rosLocalRotation.w;
 
                 // Update Stamp
-                var tfTransHeader = tfTrans as MessageWithHeader;
-                SimulatorROS2Node.UpdateROSTimestamp(ref tfTransHeader);
+                var utfStaticMsgHeader = utfStaticMsg as MessageWithHeader;
+                SimulatorROS2Node.UpdateROSTimestamp(ref utfStaticMsgHeader);
 
-                tfMsg.Transforms[0] = tfTrans;
-
-                tfPublisher.Publish(tfMsg);
-
-
+                utfStaticPublisher.Publish(utfStaticMsg);
             }
         }
 
@@ -131,32 +114,25 @@ namespace AWSIM
             {
                 if (isStatic == false)
                 {
+                    t_transform = transform;
+
                     var rosLocalPosition = ROS2Utility.UnityToRosPosition(t_transform.localPosition);
                     var rosLocalRotation = ROS2Utility.UnityToRosRotation(t_transform.localRotation);
 
-                    // tfMsg.Transforms.Transform[0].Translation.X = rosLocalPosition.x;
-                    // tfMsg.Transforms.Transform[0].Translation.Y = rosLocalPosition.y;
-                    // tfMsg.Transforms.Transform[0].Translation.Z = rosLocalPosition.z;
-                    // tfMsg.Transforms.Transform[0].Rotation.X = rosLocalRotation.x;
-                    // tfMsg.Transforms.Transform[0].Rotation.Y = rosLocalRotation.y;
-                    // tfMsg.Transforms.Transform[0].Rotation.Z = rosLocalRotation.z;
 
-
-                    tfTrans.Transform.Translation.X = rosLocalPosition.x;
-                    tfTrans.Transform.Translation.Y = rosLocalPosition.y;
-                    tfTrans.Transform.Translation.Z = rosLocalPosition.z;
-                    tfTrans.Transform.Rotation.X = rosLocalRotation.x;
-                    tfTrans.Transform.Rotation.Y = rosLocalRotation.y;
-                    tfTrans.Transform.Rotation.Z = rosLocalRotation.z;
-                    tfTrans.Transform.Rotation.W = rosLocalRotation.w;
+                    utfMsg.Transform.Translation.X = rosLocalPosition.x;
+                    utfMsg.Transform.Translation.Y = rosLocalPosition.y;
+                    utfMsg.Transform.Translation.Z = rosLocalPosition.z;
+                    utfMsg.Transform.Rotation.X = rosLocalRotation.x;
+                    utfMsg.Transform.Rotation.Y = rosLocalRotation.y;
+                    utfMsg.Transform.Rotation.Z = rosLocalRotation.z;
+                    utfMsg.Transform.Rotation.W = rosLocalRotation.w;
 
                     // Update Stamp
-                    var tfTransHeader = tfTrans as MessageWithHeader;
-                    SimulatorROS2Node.UpdateROSTimestamp(ref tfTransHeader);
+                    var utfMsgHeader = utfMsg as MessageWithHeader;
+                    SimulatorROS2Node.UpdateROSTimestamp(ref utfMsgHeader);
 
-                    tfMsg.Transforms[0] = tfTrans;
-
-                    tfPublisher.Publish(tfMsg);
+                    utfPublisher.Publish(utfMsg);
                 }
             }
         }

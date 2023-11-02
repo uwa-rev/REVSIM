@@ -1472,6 +1472,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4843604171253800091}
+  - component: {fileID: 7579683738422582438}
   m_Layer: 6
   m_Name: sensor_kit_base_link
   m_TagString: Untagged
@@ -1503,6 +1504,27 @@ Transform:
   m_Father: {fileID: 5512666411487739948}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7579683738422582438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5383865282617533158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31edd641a06b6dcda86fdb077676e0fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frameId: sensor_kit_base_link
+  parentFrameId: base_link
+  publishHz: 10
+  isStatic: 1
+  qosSettings:
+    ReliabilityPolicy: 1
+    DurabilityPolicy: 2
+    HistoryPolicy: 1
+    Depth: 1
 --- !u!1 &5499827412767117486
 GameObject:
   m_ObjectHideFlags: 0
@@ -2014,17 +2036,17 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7256385910005614564}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31edd641a06b6dcda86fdb077676e0fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tfTopic: /tf_static
   frameId: gnss_link
-  parentFrameId: _link
+  parentFrameId: base_link
+  publishHz: 10
   isStatic: 1
   qosSettings:
-    ReliabilityPolicy: 2
+    ReliabilityPolicy: 1
     DurabilityPolicy: 2
     HistoryPolicy: 1
     Depth: 1
@@ -2037,6 +2059,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8247886721122015980}
+  - component: {fileID: 5662309289470581703}
   m_Layer: 6
   m_Name: velodyne_front_link
   m_TagString: Untagged
@@ -2059,6 +2082,27 @@ Transform:
   m_Father: {fileID: 4843604171253800091}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5662309289470581703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7951434265901400619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31edd641a06b6dcda86fdb077676e0fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frameId: velodyne_front_link
+  parentFrameId: sensor_kit_base_link
+  publishHz: 10
+  isStatic: 1
+  qosSettings:
+    ReliabilityPolicy: 1
+    DurabilityPolicy: 2
+    HistoryPolicy: 1
+    Depth: 1
 --- !u!1 &7997555940447921516
 GameObject:
   m_ObjectHideFlags: 0
@@ -2993,6 +3037,10 @@ PrefabInstance:
     - target: {fileID: 5621238221860094232, guid: e312a43ad62d38a40b798203047bfe57, type: 3}
       propertyPath: FrameID
       value: base_link
+      objectReference: {fileID: 0}
+    - target: {fileID: 5621238221860094232, guid: e312a43ad62d38a40b798203047bfe57, type: 3}
+      propertyPath: QosSettings.ReliabilityPolicy
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5621238221860094233, guid: e312a43ad62d38a40b798203047bfe57, type: 3}
       propertyPath: m_RootOrder
